@@ -17,6 +17,8 @@ export class TaskListComponent implements OnInit {
   tasks: any[] = []; // Initialize tasks as an empty array
   editingTask: any = null; // Initialize editingTask as null
   searchTerm: string = '';
+  showConfirmDialog = false;
+  taskIdToDelete: number | null = null;
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {}
 
@@ -38,16 +40,32 @@ export class TaskListComponent implements OnInit {
   }
 
   onDeleteTask(taskId: number): void {
-    this.taskService.deleteTask(taskId.toString()).subscribe(
-      () => {
-        this.tasks = this.tasks.filter(task => task.id !== taskId);
-        this.snackBar.open('Task deleted successfully!', 'Close', { duration: 3000 });
-      },
-      (error) => {
-        console.error('Error deleting task:', error);
-        this.snackBar.open('Failed to delete task.', 'Close', { duration: 3000 });
-      }
-    );
+    this.taskIdToDelete = taskId;
+    this.showConfirmDialog = true;
+  }
+
+  confirmDelete(): void {
+    if (this.taskIdToDelete !== null) {
+      this.taskService.deleteTask(this.taskIdToDelete.toString()).subscribe(
+        () => {
+          this.tasks = this.tasks.filter(task => task.id !== this.taskIdToDelete);
+          this.snackBar.open('Task deleted successfully!', 'Close', { duration: 3000 });
+          this.showConfirmDialog = false;
+          this.taskIdToDelete = null;
+        },
+        (error) => {
+          console.error('Error deleting task:', error);
+          this.snackBar.open('Failed to delete task.', 'Close', { duration: 3000 });
+          this.showConfirmDialog = false;
+          this.taskIdToDelete = null;
+        }
+      );
+    }
+  }
+
+  cancelDelete(): void {
+    this.showConfirmDialog = false;
+    this.taskIdToDelete = null;
   }
 
   onSaveEdit(updatedTask: any) {

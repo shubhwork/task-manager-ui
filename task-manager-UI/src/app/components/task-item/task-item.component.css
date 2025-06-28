@@ -83,3 +83,30 @@
   font-weight: bold;
   margin-left: 0.5rem;
 }
+
+.priority-label {
+  font-weight: 600;
+  padding: 0.2em 0.8em;
+  border-radius: 8px;
+  margin-left: 0.5em;
+  margin-bottom: 0.2em;
+  display: inline-block;
+}
+
+.priority-high {
+  background: #ffeaea;
+  color: #d90429;
+  border: 1.5px solid #d90429;
+}
+
+.priority-medium {
+  background: #fffbe6;
+  color: #e6b800;
+  border: 1.5px solid #e6b800;
+}
+
+.priority-low {
+  background: #eaffea;
+  color: #218838;
+  border: 1.5px solid #218838;
+}

@@ -3,6 +3,17 @@
     <h3 class="task-title" [class.completed]="task.status === 'COMPLETED'">{{ task.title }}</h3>
     <p [class.completed]="task.status === 'COMPLETED'">{{ task.description }}</p>
     <span class="task-status">Status: {{ task.status }}</span>
+        <span 
+  class="priority-label"
+  [ngClass]="{
+    'priority-high': task.priority === 'HIGH',
+    'priority-medium': task.priority === 'MEDIUM',
+    'priority-low': task.priority === 'LOW'
+  }"
+>
+  Priority: {{ task.priority || 'MEDIUM' }}
+</span>
+
     <span *ngIf="task.dueDate">Due: {{ task.dueDate | date:'mediumDate' }}</span>
     <span *ngIf="isOverdue()" class="overdue-label">Overdue!</span>
   </div>

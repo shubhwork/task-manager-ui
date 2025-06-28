@@ -18,6 +18,7 @@ export class AddTaskComponent {
   categoryId: number = 1; // Default category ID
   categoryName: string = 'Rahul'; // Default category name
   dueDate: string = ''; // Due date
+  priority: string = 'MEDIUM'; // Default value
 
   @Output() closeEvent = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
@@ -37,7 +38,8 @@ export class AddTaskComponent {
           id: this.categoryId,
           name: this.categoryName
         },
-        dueDate: this.dueDate // <-- add this
+        dueDate: this.dueDate, 
+        priority: this.priority 
       };
 
       console.log('Task to be added:', newTask); // Debug log

@@ -11,6 +11,11 @@
     <input [(ngModel)]="categoryId" placeholder="Enter category ID" type="number" />
     <input [(ngModel)]="categoryName" placeholder="Enter category name" />
     <input [(ngModel)]="dueDate" type="date" placeholder="Due Date" />
+    <select [(ngModel)]="priority">
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
     <button (click)="onAddTask()">Add Task</button>
     <button (click)="close()" type="button" class="close-btn">Cancel</button>
   </div>
