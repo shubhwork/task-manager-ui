@@ -1,0 +1,82 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #4f8cff, #38b6ff);
+  padding: 1rem 2rem;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  position: relative;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+  margin-left: 1rem;
+}
+
+.hamburger span {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 2px;
+  display: block;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  nav {
+    flex-direction: column;
+    position: absolute;
+    top: 64px;
+    right: 0;
+    background: #fff;
+    color: #4f8cff;
+    width: 180px;
+    box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
+    padding: 1rem;
+    border-radius: 8px 0 0 8px;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    z-index: 100;
+  }
+  nav.open {
+    transform: translateX(0);
+  }
+   button {
+    color: #4f8cff;
+    background: none;
+    box-shadow: none;
+    margin: 0.5rem 0;
+    width: 100%;
+    text-align: left;
+  }
+}
+
+button {
+  background: #fff;
+  color: #4f8cff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  margin: 0 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.07);
+}
+
+button:hover {
+  background: #ffe066;
+  color: #222;
+  box-shadow: 0 4px 16px rgba(79, 140, 255, 0.15);
+}

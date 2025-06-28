@@ -1,0 +1,17 @@
+<div class="modal-backdrop" (click)="close()"></div>
+<div class="modal">
+  <div class="add-task">
+    <input [(ngModel)]="title" placeholder="Enter task title" />
+    <textarea [(ngModel)]="description" placeholder="Enter task description"></textarea>
+    <select [(ngModel)]="status">
+      <option value="IN_PROGRESS">In Progress</option>
+      <option value="COMPLETED">Completed</option>
+      <option value="PENDING">Pending</option>
+    </select>
+    <input [(ngModel)]="categoryId" placeholder="Enter category ID" type="number" />
+    <input [(ngModel)]="categoryName" placeholder="Enter category name" />
+    <input [(ngModel)]="dueDate" type="date" placeholder="Due Date" />
+    <button (click)="onAddTask()">Add Task</button>
+    <button (click)="close()" type="button" class="close-btn">Cancel</button>
+  </div>
+</div>

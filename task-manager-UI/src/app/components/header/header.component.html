@@ -1,0 +1,14 @@
+<header>
+  <h1 style="cursor:pointer;" (click)="navigateToHome()">Task Manager</h1>
+  <div class="hamburger" (click)="toggleSidebar()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <nav [class.open]="sidebarOpen">
+    <button (click)="openAddTask()">Add Task</button>
+    <button (click)="navigateToViewTask()">View Task</button>
+  </nav>
+  <app-add-task *ngIf="showAddTask" (closeEvent)="showAddTask = false">
+  </app-add-task>
+</header>

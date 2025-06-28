@@ -1,0 +1,21 @@
+<div class="view-task">
+  <h2>Task List</h2>
+
+  <!-- Error Message -->
+  <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+
+  <!-- Task List -->
+  <ul *ngIf="tasks.length > 0; else noTasks">
+    <li *ngFor="let task of tasks">
+      <h3>{{ task.title }}</h3>
+      <p>{{ task.description }}</p>
+      <p>Status: {{ task.status }}</p>
+      <p>Category: {{ task.category?.name }}</p>
+    </li>
+  </ul>
+
+  <!-- No Tasks Message -->
+  <ng-template #noTasks>
+    <p>No tasks available.</p>
+  </ng-template>
+</div>

@@ -1,0 +1,20 @@
+<div class="task-item" [class.overdue]="isOverdue()">
+  <div class="task-content">
+    <h3 class="task-title" [class.completed]="task.status === 'COMPLETED'">{{ task.title }}</h3>
+    <p [class.completed]="task.status === 'COMPLETED'">{{ task.description }}</p>
+    <span class="task-status">Status: {{ task.status }}</span>
+    <span *ngIf="task.dueDate">Due: {{ task.dueDate | date:'mediumDate' }}</span>
+    <span *ngIf="isOverdue()" class="overdue-label">Overdue!</span>
+  </div>
+  <div class="task-actions">
+    <button (click)="onEdit()">Edit</button>
+    <button (click)="onDelete()">Delete</button>
+    <button 
+      (click)="toggleCompleted()" 
+      [disabled]="task.status === 'COMPLETED'"
+      *ngIf="task.status !== 'COMPLETED'">
+      Complete
+    </button>
+    <span *ngIf="task.status === 'COMPLETED'" style="color: #38b6ff; font-weight: 600;">Completed</span>
+  </div>
+</div>

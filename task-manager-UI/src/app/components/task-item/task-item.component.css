@@ -1,0 +1,85 @@
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.2rem 1.5rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+    margin-bottom: 1rem;
+    border: none;
+    transition: box-shadow 0.2s;
+    gap: 2rem;
+  }
+  
+  .task-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  
+  .task-title {
+    font-weight: 600;
+    color: #222;
+    margin: 0;
+
+  }
+  
+  .task-status {
+  display: flex;
+  padding: 0.1em 0.1em;      /* Tighter vertical and horizontal padding */
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ffe066, #ffd43b);
+  color: #4f8cff;
+  font-weight: 600;
+  font-size: 0.97rem;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+  border: none;
+  margin: 0.1rem 0;
+  transition: background 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+  
+  .task-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+  
+  .task-actions button {
+  background: #4f8cff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.2rem;      /* Make padding the same for all buttons */
+  min-width: 110px;            /* Ensures all buttons have the same width */
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: center;
+  margin-bottom: 0.3rem;       /* Optional: space between stacked buttons */
+}
+
+.task-actions button:hover {
+  background: #38b6ff;
+}
+
+  .completed {
+    text-decoration: line-through;
+    color: #aaa;
+  }
+
+.overdue {
+  border-left: 6px solid #ff4d4f;
+  background: #fff6f6;
+}
+
+.overdue-label {
+  color: #ff4d4f;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}

@@ -1,0 +1,39 @@
+<div class="dashboard">
+  <h1>Welcome to Task Manager!</h1>
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-number">{{ completedCount }}</span>
+      <span class="stat-label">Completed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-number">{{ incompleteCount }}</span>
+      <span class="stat-label">Incomplete</span>
+    </div>
+    <div class="stat" *ngIf="dueTodayCount !== undefined">
+      <span class="stat-number">{{ dueTodayCount }}</span>
+      <span class="stat-label">Due Today</span>
+    </div>
+  </div>
+</div>
+
+<h2>Task List</h2>
+<input
+  type="text"
+  [(ngModel)]="searchTerm"
+  placeholder="Search tasks..."
+  class="search-bar"
+/>
+<app-task-item
+  *ngFor="let task of filteredTasks"
+  [task]="task"
+  (editTask)="openEditTask($event)"
+  (deleteTask)="onDeleteTask($event)"
+  (toggleComplete)="onToggleComplete($event)">
+</app-task-item>
+
+<app-edit-task
+  *ngIf="editingTask"
+  [task]="editingTask"
+  (close)="editingTask = null"
+  (save)="onSaveEdit($event)">
+</app-edit-task>
