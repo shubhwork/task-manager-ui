@@ -16,6 +16,11 @@
 
     <span *ngIf="task.dueDate">Due: {{ task.dueDate | date:'mediumDate' }}</span>
     <span *ngIf="isOverdue()" class="overdue-label">Overdue!</span>
+<span *ngIf="task.tags && task.tags.length">Tags: 
+  <span *ngFor="let tag of task.tags; let last = last">
+    {{ tag }}<span *ngIf="!last">, </span>
+  </span>
+</span>
   </div>
   <div class="task-actions">
     <button (click)="onEdit()">Edit</button>

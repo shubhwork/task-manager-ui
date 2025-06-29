@@ -1,3 +1,11 @@
+<app-header (openAddTaskClicked)="showAddTask = true"></app-header>
+
+<app-add-task
+  *ngIf="showAddTask"
+  (taskAdded)="onTaskAdded($event); showAddTask = false"
+  (closeEvent)="showAddTask = false">
+</app-add-task>
+
 <div class="dashboard">
   <h1>Welcome to Task Manager!</h1>
   <div class="stats">
@@ -16,20 +24,56 @@
   </div>
 </div>
 
-<h2>Task List</h2>
-<input
-  type="text"
-  [(ngModel)]="searchTerm"
-  placeholder="Search tasks..."
-  class="search-bar"
-/>
+<div class="task-list-toolbar">
+  <h2>Task List</h2>
+  <input
+    type="text"
+    [(ngModel)]="searchTerm"
+    placeholder="Search tasks..."
+    class="search-bar"
+  />
+  <div class="filter-group">
+    <select [(ngModel)]="selectedPriority" class="filter-dropdown">
+      <option value="">All Priorities</option>
+      <option value="HIGH">High</option>
+      <option value="MEDIUM">Medium</option>
+      <option value="LOW">Low</option>
+    </select>
+    <input
+      type="date"
+      [(ngModel)]="selectedDueDate"
+      class="filter-dropdown"
+      placeholder="Filter by Due Date"
+    />
+  </div>
+</div>
+
+<!-- Task items will be displayed here -->
 <app-task-item
-  *ngFor="let task of filteredTasks"
+  *ngFor="let task of paginatedTasks"
   [task]="task"
   (editTask)="openEditTask($event)"
   (deleteTask)="onDeleteTask($event)"
   (toggleComplete)="onToggleComplete($event)">
 </app-task-item>
+
+<!-- Pagination Controls -->
+<div class="pagination" *ngIf="totalPages > 1">
+  <button (click)="goToPage(page - 1)" [disabled]="page === 1">&laquo; Prev</button>
+  <span>Page {{ page }} of {{ totalPages }}</span>
+  <button (click)="goToPage(page + 1)" [disabled]="page === totalPages">Next &raquo;</button>
+</div>
+
+<!-- Edit Task Component -->
+<app-edit-task
+  *ngIf="editingTask"
+  [task]="editingTask"
+  (close)="editingTask = null"
+  (save)="onSaveEdit($event)">
+</app-edit-task>
+
+<!-- Add Task Component -->
+
 
 <app-edit-task
   *ngIf="editingTask"
@@ -37,6 +81,12 @@
   (close)="editingTask = null"
   (save)="onSaveEdit($event)">
 </app-edit-task>
+
+<app-add-task
+  *ngIf="showAddTask"
+  (taskAdded)="onTaskAdded($event); showAddTask = false"
+  (closeEvent)="showAddTask = false">
+</app-add-task>
 
 <!-- Confirmation Dialog -->
 <div class="confirm-backdrop" *ngIf="showConfirmDialog"></div>

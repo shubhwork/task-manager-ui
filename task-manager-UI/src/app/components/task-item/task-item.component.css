@@ -85,28 +85,31 @@
 }
 
 .priority-label {
-  font-weight: 600;
-  padding: 0.2em 0.8em;
+  display: flex;
+  align-items: center;
+  padding: 0.1em 0.1em;
   border-radius: 8px;
-  margin-left: 0.5em;
-  margin-bottom: 0.2em;
-  display: inline-block;
+  font-weight: 600;
+  font-size: 0.97rem;
+  box-shadow: 0 2px 8px rgba(79, 140, 255, 0.08);
+  border: none;
+  margin: 0.1rem 0;
+  transition: background 0.2s, box-shadow 0.2s;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  min-width: 120px; /* Optional: set a min-width to match status */
 }
 
+/* Priority backgrounds (keep your color coding) */
 .priority-high {
-  background: #ffeaea;
+  background: linear-gradient(90deg, #ffeaea, #ffd6d6);
   color: #d90429;
-  border: 1.5px solid #d90429;
 }
-
 .priority-medium {
-  background: #fffbe6;
+  background: linear-gradient(90deg, #fffbe6, #fff3bf);
   color: #e6b800;
-  border: 1.5px solid #e6b800;
 }
-
 .priority-low {
-  background: #eaffea;
+  background: linear-gradient(90deg, #eaffea, #d3ffd3);
   color: #218838;
-  border: 1.5px solid #218838;
 }

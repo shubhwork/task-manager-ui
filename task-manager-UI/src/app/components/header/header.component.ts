@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common'; // <-- Add this import
 import { AddTaskComponent } from '../add-task/add-task.component';
@@ -6,11 +6,13 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, AddTaskComponent], // <-- Add CommonModule here
+  imports: [CommonModule], // <-- Add CommonModule here
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent {
+  @Output() openAddTaskClicked = new EventEmitter<void>();
+
   sidebarOpen = false;
   showAddTask = false;
 
@@ -28,7 +30,6 @@ export class HeaderComponent {
     this.sidebarOpen = !this.sidebarOpen;
   }
   openAddTask() {
-    console.log('Add Task clicked');
-    this.showAddTask = true;
+    this.openAddTaskClicked.emit();
   }
 }

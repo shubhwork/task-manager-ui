@@ -7,8 +7,5 @@
   </div>
   <nav [class.open]="sidebarOpen">
     <button (click)="openAddTask()">Add Task</button>
-    <button (click)="navigateToViewTask()">View Task</button>
   </nav>
-  <app-add-task *ngIf="showAddTask" (closeEvent)="showAddTask = false">
-  </app-add-task>
 </header>

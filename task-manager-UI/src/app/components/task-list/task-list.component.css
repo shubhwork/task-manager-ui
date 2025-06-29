@@ -1,7 +1,7 @@
 .task-list {
     padding: 1rem;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 3 rem;
   }
   
   .dashboard {
@@ -142,4 +142,68 @@
   
   .cancel-btn:hover {
     background: #e0e7ef;
+  }
+  
+  .filter-dropdown {
+    margin: 0 0.5rem 1.5rem 0;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1.5px solid #e0e7ef;
+    font-size: 1rem;
+  }
+  
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .pagination button {
+    background: #4f8cff;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .pagination button[disabled] {
+    background: #e0e7ef;
+    color: #aaa;
+    cursor: not-allowed;
+  }
+  
+  .filters-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .task-list-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  
+  .task-list-toolbar h2 {
+  margin: 0 0 0 1.5rem;  /* Add left margin if you want even more space */
+    font-size: 1.5rem;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  
+  .task-list-toolbar .search-bar,
+  .task-list-toolbar .filter-dropdown {
+    margin: 3;
+    width: auto;
+    min-width: 160px;
   }

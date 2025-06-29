@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router'; // Import RouterOutlet for routi
 @Component({
   selector: 'app-root',
   standalone: true, // Mark as standalone component
-  imports: [HeaderComponent, RouterOutlet], // Add HeaderComponent and RouterOutlet here
+  imports: [ RouterOutlet], // Add HeaderComponent and RouterOutlet here
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

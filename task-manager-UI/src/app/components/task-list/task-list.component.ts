@@ -5,11 +5,20 @@ import { TaskService } from '../../services/task.service';
 import { TaskItemComponent } from '../task-item/task-item.component'; // Import TaskItemComponent if used
 import { EditTaskComponent } from '../edit-task/edit-task.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { AddTaskComponent } from '../add-task/add-task.component'; // <-- Add this import
+import { HeaderComponent } from '../header/header.component'; // <-- Add this import
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, TaskItemComponent, EditTaskComponent], // <-- Add FormsModule here
+  imports: [
+    CommonModule,
+    FormsModule,
+    TaskItemComponent,
+    EditTaskComponent,
+    AddTaskComponent,
+    HeaderComponent // <-- Add this here
+  ],
   templateUrl: './task-list.component.html',
   styleUrls: ['./task-list.component.css']
 })
@@ -19,6 +28,11 @@ export class TaskListComponent implements OnInit {
   searchTerm: string = '';
   showConfirmDialog = false;
   taskIdToDelete: number | null = null;
+  selectedPriority: string = '';
+  selectedDueDate: string = '';
+  showAddTask = false;
+  page: number = 1;
+  pageSize: number = 5;
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {}
 
@@ -110,14 +124,64 @@ export class TaskListComponent implements OnInit {
   }
 
   get filteredTasks() {
-    if (!this.searchTerm?.trim()) return this.tasks;
-    const term = this.searchTerm.trim().toLowerCase();
-    const filtered = this.tasks.filter(task =>
-      (task.title && task.title.toLowerCase().includes(term)) ||
-      (task.description && task.description.toLowerCase().includes(term)) ||
-      (task.status && task.status.toLowerCase().includes(term))
-    );
-    console.log('Filtered tasks:', filtered);
+    let filtered = this.tasks;
+
+    // Search filter
+    if (this.searchTerm?.trim()) {
+      const term = this.searchTerm.trim().toLowerCase();
+      filtered = filtered.filter(task =>
+        (task.title && task.title.toLowerCase().includes(term)) ||
+        (task.description && task.description.toLowerCase().includes(term)) ||
+        (task.status && task.status.toLowerCase().includes(term))
+      );
+    }
+
+
+
+    // Priority filter
+    if (this.selectedPriority) {
+      filtered = filtered.filter(task => task.priority === this.selectedPriority);
+    }
+
+    // Due date filter
+    if (this.selectedDueDate) {
+      filtered = filtered.filter(task =>
+        task.dueDate && task.dueDate.slice(0, 10) === this.selectedDueDate
+      );
+    }
+
     return filtered;
+  }
+
+  get uniqueTags(): string[] {
+    const tags = this.tasks.flatMap(task => Array.isArray(task.tags) ? task.tags : []);
+    return tags.filter((tag, i, arr) => tag && arr.indexOf(tag) === i);
+  }
+
+  get uniqueCategories(): string[] {
+    const categories = this.tasks.map(t => t.category?.name).filter(Boolean);
+    return categories.filter((cat, i, arr) => arr.indexOf(cat) === i);
+  }
+
+  onTaskAdded(newTask: any) {
+    console.log('New task added:', newTask);
+    this.tasks = [newTask, ...this.tasks];
+    this.searchTerm = '';
+  }
+
+  get paginatedTasks() {
+    const start = (this.page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    return this.filteredTasks.slice(start, end);
+  }
+
+  get totalPages(): number {
+    return Math.ceil(this.filteredTasks.length / this.pageSize);
+  }
+
+  goToPage(pageNum: number) {
+    if (pageNum >= 1 && pageNum <= this.totalPages) {
+      this.page = pageNum;
+    }
   }
 }

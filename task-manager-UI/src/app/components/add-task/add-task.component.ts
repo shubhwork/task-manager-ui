@@ -22,6 +22,7 @@ export class AddTaskComponent {
 
   @Output() closeEvent = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
+  @Output() taskAdded = new EventEmitter<any>();
 
   constructor(private taskService: TaskService, private snackBar: MatSnackBar) {} // Inject MatSnackBar
 
@@ -47,6 +48,8 @@ export class AddTaskComponent {
       // Call the service to send the request
       this.taskService.addTask(newTask).subscribe(
         (response) => {
+          this.taskAdded.emit(response); // Emit the new task
+          this.closeEvent.emit(); // <-- Add this line to close the modal
           console.log('Task added successfully:', response); // Debug log
           this.snackBar.open('Task added successfully!', 'Close', {
             duration: 3000, // Duration in milliseconds

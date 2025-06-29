@@ -20,6 +20,7 @@ export class EditTaskComponent implements OnChanges {
   categoryName: string = '';
   dueDate: string = '';
   priority: string = 'MEDIUM';
+  tags: string = ''; // Store as comma-separated string or use an array for advanced usage
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['task'] && this.task) {
@@ -28,8 +29,9 @@ export class EditTaskComponent implements OnChanges {
       this.status = this.task.status || 'IN_PROGRESS';
       this.categoryId = this.task.category?.id || 1;
       this.categoryName = this.task.category?.name || '';
-      this.dueDate = this.task.dueDate || '';
+      this.dueDate = this.task.dueDate ? this.task.dueDate.slice(0, 10) : '';
       this.priority = this.task.priority || 'MEDIUM';
+      this.tags = this.task.tags || ''; // Initialize tags
     }
   }
 
@@ -44,7 +46,8 @@ export class EditTaskComponent implements OnChanges {
         name: this.categoryName
       },
       dueDate: this.dueDate,
-      priority: this.priority
+      priority: this.priority, // <-- Add this line!
+      tags: this.tags.split(',').map(tag => tag.trim()).filter(tag => tag) // Convert to array
     };
     this.save.emit(newTask);
   }

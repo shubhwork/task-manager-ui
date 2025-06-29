@@ -9,13 +9,15 @@
     <option value="PENDING">Pending</option>
   </select>
   <input [(ngModel)]="categoryId" placeholder="Category ID" type="number" />
-  <input [(ngModel)]="categoryName" placeholder="Category Name" />
+  <input [(ngModel)]="categoryName" placeholder="Enter category name" />
   <input [(ngModel)]="dueDate" type="date" placeholder="Due Date" />
   <select [(ngModel)]="priority">
     <option value="HIGH">High</option>
     <option value="MEDIUM">Medium</option>
     <option value="LOW">Low</option>
   </select>
+  <!-- For tags (comma-separated) -->
+  <input [(ngModel)]="tags" placeholder="Enter tags (comma separated)" />
   <button (click)="onSave()">Save</button>
   <button (click)="close.emit()" type="button" class="close-btn">Cancel</button>
 </div>
